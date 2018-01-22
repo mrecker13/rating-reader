@@ -11,17 +11,23 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+    <!-- rating styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../public/css/style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- rating CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
     <title>Rating Reader</title>
 </head>
 
 <body>
 
-    <ul class="nav nav-tabs nav-justified">
+    <ul class="nav nav-pills nav-justified">
         <li role = "presentation" class = "active">
-            <a href = "/">Home</a>
+            <a href = "test.html">Home</a>
         </li>
         <li role = "presentation">
             <a href = "/item">Item</a>
@@ -33,7 +39,18 @@
             <a href = "/category">Category</a>
         </li>
     </ul>
-
+    <div class="container">
+        <div>
+            <a href="add-test.html" class="btn btn-primary btn-lg active" id="add-btn" role="button">Add a rating!</a>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Stone IPA</h3>
+            </div>
+            <div class="panel-body">
+                Tasty
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
