@@ -14,6 +14,8 @@ module.exports = function(app) {
             res.render("index", hbsObject);
         });
     });
+
+    
     // POST route for adding an item
     app.post("/api/rating/create", function(req, res) {
       console.log(req.body);
@@ -22,6 +24,17 @@ module.exports = function(app) {
           res.json(result);
         });
       });
+
+    app.get("/item/:item", function(req, res) {
+      db.Rating.findAll({
+        include: db.User,
+        where: {
+          item: req.params.item
+        }
+      }).then(function(data) {
+        res.json(data);
+      })
+    })
 
       // GET method for fining a specific post
       app.get("/api/rating/:id", function(req, res) {
