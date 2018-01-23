@@ -9,6 +9,18 @@ $(function () {
          event.preventDefault();
          var rating = $("#rateYo").rateYo("rating");
          console.log("Rating is: " + rating);
-     })
+
+         var newRating = {
+             item: $("#item").val().trim(),
+             comment: $("#comment").val().trim(),
+             rating: rating,
+             UserId: 1
+         };
+
+         $.post("api/rating/create", newRating, function() {
+             console.log("Added a rating!");
+             window.location.href="/";
+         });
+     });
 
    });
