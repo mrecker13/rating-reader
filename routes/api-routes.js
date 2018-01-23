@@ -3,7 +3,7 @@ var db = require("../models");
 //
 module.exports = function(app) {
     // GET route for all items
-    app.get("api/all", function(req, res) {
+    app.get("/api/all", function(req, res) {
         db.User.findAll({
             include: db.Rating
         }).then(function(ratings) {
