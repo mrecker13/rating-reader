@@ -5,7 +5,8 @@ module.exports = function(app) {
     // GET route for all items
     app.get("/", function(req, res) {
         db.Rating.findAll({
-            include: db.User
+            include: db.User,
+            order: [["createdAt", "DESC"]]
         }).then(function(data) {
           var hbsObject = {
             ratings: data
