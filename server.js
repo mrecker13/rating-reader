@@ -11,7 +11,7 @@ var app = express();
 // Sets up the Express app to handle data parsing
 app.use(express.static(process.cwd() + '/public'));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));

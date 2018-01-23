@@ -15,6 +15,7 @@ module.exports = function(app) {
     });
     // POST route for adding an item
     app.post("/api/rating/create", function(req, res) {
+      console.log(req.body);
         db.Rating.create(req.body).then(function(result) {
           console.log("Added: " + req.body);
           res.json(result);
