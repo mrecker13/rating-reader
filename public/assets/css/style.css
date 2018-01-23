@@ -1,0 +1,14 @@
+.panel-heading {
+    position: relative;
+}
+
+.rating {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#new-rating {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
