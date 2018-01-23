@@ -12,6 +12,7 @@ $(function () {
 
          var newRating = {
              item: $("#item").val().trim(),
+             category: $("#category").val().trim(),
              comment: $("#comment").val().trim(),
              rating: rating,
              UserId: 1
