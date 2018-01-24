@@ -8,10 +8,7 @@ module.exports = function(app) {
             include: db.User,
             order: [["createdAt", "DESC"]]
         }).then(function(data) {
-          var hbsObject = {
-            ratings: data
-          }
-            res.render("index", hbsObject);
+            res.json(data);
         });
     });
     // POST route for adding an item

@@ -10,5 +10,12 @@ module.exports = function(app) {
       app.get("/item", function(req, res) {
         res.render("item");
       });
+
+      app.get("/category", function(req, res) {
+        res.render("category");
+      });
+
+      app.get("/login", function(req, res) {
+        res.render("login");
+      });
 }
-//

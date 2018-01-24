@@ -14,7 +14,6 @@ $(document).ready(function () {
                 starWidth: "16px"
             });
         }
-        console.log(data);
     })
 
      $("#rateYo").rateYo({
@@ -111,6 +110,33 @@ $(document).ready(function () {
            }
        });
        $("#search-category").val("");
+    });
+
+    $("#register-btn").on("click", function(event) {
+        event.preventDefault();
+
+        var newUser = {
+            username: $("#user-login").val().trim(),
+            password: $("#pw-login").val().trim()
+        };
+
+        $.get("api/users/all", function(data) {
+            for(var i = 0; i < data.length; i++) {
+                if (newUser.username === data[i].username) {
+                    $("#unDiv").addClass("has-error");
+                    $("#labelError").append("<span class='label label-danger'> Username already in use</span>");
+                    $("#labelError").attr("style", "color:rgb(156, 59, 59)");
+                    return false;
+                }
+            }
+            $.post("api/users/create", newUser, function() {
+                console.log("Registered!");
+                location.reload();
+            });
+        })
+
+        $("#user-login").val("");
+        $("#pw-login").val("");
     })
 
    });
