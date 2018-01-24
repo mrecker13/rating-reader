@@ -16,3 +16,11 @@
 h1 {
     text-align: center;
 }
+
+#itemSearchDiv, #catSearchDiv {
+    margin-top: 10px;
+}
+
+#item-btn, #category-btn {
+    margin-top: 10px;
+}

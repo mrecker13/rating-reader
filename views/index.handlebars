@@ -1,18 +1,7 @@
 <div class="container">
-        <h1>Rating Reader</h1>
-        <div>
-            <a href="/add" class="btn btn-primary btn-lg active" id="new-rating" role="button">Add a rating!</a>
-        </div>
-        {{#each ratings}}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{item}}</h3>
-                <p class="rating">{{rating}} <span class="glyphicon glyphicon-star" aria-hidden="true"></span></p>
-            </div>
-            <div class="panel-body">
-                <b><p>{{User.username}}:</p></b>
-                <p>{{comment}}</p>
-            </div>
-        </div>
-        {{/each}}
+    <h1>Rating Reader</h1>
+    <div>
+        <a href="/add" class="btn btn-primary btn-lg active" id="new-rating" role="button">Add a rating!</a>
     </div>
+    <div class="start-data"></div>
+</div>
