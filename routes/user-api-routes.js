@@ -3,7 +3,7 @@ var db = require("../models");
 //
 module.exports = function (app) {
     // GET route for all users
-    app.get("/user", function (req, res) {
+    app.get("/api/users/all", function (req, res) {
         db.User.findAll({
             include: db.Rating
         }).then(function (ratings) {
@@ -11,7 +11,7 @@ module.exports = function (app) {
         });
     });
     // POST route for adding a user
-    app.post("/api/user/create", function (req, res) {
+    app.post("/api/users/create", function (req, res) {
         db.User.create(req.body).then(function (result) {
             console.log("Added: " + req.body);
             res.json(result);
