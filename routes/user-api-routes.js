@@ -1,4 +1,4 @@
-//
+var bcrypt = require("bcrypt-nodejs");
 var db = require("../models");
 //
 module.exports = function(app) {

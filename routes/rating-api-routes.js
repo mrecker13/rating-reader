@@ -8,7 +8,6 @@ module.exports = function(app) {
             include: db.User,
             order: [["createdAt", "DESC"]]
         }).then(function(data) {
-          console.log(data);
             res.json(data);
         });
     });

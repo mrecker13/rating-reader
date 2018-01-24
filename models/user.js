@@ -1,3 +1,5 @@
+var bcrypt = require("bcrypt-nodejs");
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User",
     {
@@ -5,12 +7,22 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      body: {
+      password: {
         type: DataTypes.TEXT,
         allowNull: false,
       }
     });
   
+  User.beforeCreate(function(model, options){
+    return new Promise (function(resolve, reject){
+        bcrypt.hash(model.password, null, null, function(err, hash) {
+            if(err) return reject(err);
+            model.password = hash;
+            return resolve(model, options);
+        });
+    });
+  });
+
 
   User.associate = function(models) {
     // Associating User with Posts
