@@ -3,7 +3,7 @@ var db = require("../models");
 //
 module.exports = function(app) {
     // GET route for all items
-    app.get("/", function(req, res) {
+    app.get("/api/home", function(req, res) {
         db.Rating.findAll({
             include: db.User,
             order: [["createdAt", "DESC"]]
@@ -23,22 +23,26 @@ module.exports = function(app) {
       db.Rating.findAll({
         include: db.User,
         where: {
-          item: req.params.item
+          item: {
+            $like: "%" + req.params.item + "%"
+          }
         }
       }).then(function(data) {
         res.json(data);
       })
     })
       // GET method for fining a specific post
-      app.get("/api/rating/:id", function(req, res) {
-        db. Rating.findOne({
-          where: {
-            id: req.params.id
-          },
-          include: [db.User]
-        }).then(function(ratings) {
-          res.json(ratings);
-        });
-      });
+      app.get("/category/:category", function(req, res) {
+              db.Rating.findAll({
+                include: db.User,
+                where: {
+                  category: {
+                   $like: "%" + req.params.category + "%"
+                  }
+                }
+              }).then(function(data) {
+               res.json(data);
+             })
+            })
 }
 //
