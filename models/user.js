@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
       }
     });
-  
   User.beforeCreate(function(model, options){
     return new Promise (function(resolve, reject){
         bcrypt.hash(model.password, null, null, function(err, hash) {
@@ -22,8 +21,6 @@ module.exports = function(sequelize, DataTypes) {
         });
     });
   });
-
-
   User.associate = function(models) {
     // Associating User with Posts
     // When an User is deleted, also delete any associated Posts
@@ -31,6 +28,5 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
   };
-
   return User;
 };

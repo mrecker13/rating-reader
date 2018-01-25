@@ -52,12 +52,12 @@ module.exports = function (app) {
     });
   });
       // GET method for finding a specific author
-      app.get("/api/user/:id", function (req, res) {
+      app.get("/api/user/:username", function (req, res) {
         db.User.findOne({
+            include: db.Rating,
           where: {
-            id: req.params.id
-          },
-          include: db.Ratings
+            username: { $like: "%" + req.params.username + "%" }
+          }        
         }).then(function (ratings) {
           res.json(ratings);
         });

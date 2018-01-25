@@ -70,3 +70,8 @@ h1 {
 #item-btn, #category-btn, #user-btn {
     margin-top: 10px;
 }
+
+.footer {
+    float: right;
+    color: gray;
+}

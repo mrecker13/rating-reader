@@ -74,7 +74,7 @@ $(document).ready(function () {
             console.log("Looking it up.")
             console.log(data);
             if (data.length !== 0) {
-                $("#item-heading").html("<h3>" + item + "</h3>");
+                $("#item-heading").html("<h3>" + "Showing Results for: "+ item + "</h3>");
 
                 for(var i = 0; i < data.length; i++) {
                     var row = $("<div>");
@@ -112,7 +112,7 @@ $(document).ready(function () {
            console.log("Looking it up.")
            console.log(data);
            if (data.length !== 0) {
-               $("#cat-heading").html("<h3>" + catSearch + "</h3>")
+               $("#cat-heading").html("<h3>" + "Showing Results for: " + catSearch + "</h3>")
            
                 for(var i = 0; i < data.length; i++) {
                     var row = $("<div>");
@@ -210,28 +210,69 @@ $(document).ready(function () {
 
    });
 
-   $("#user-btn").on("click", function(event) {
+//    $("#user-btn").on("click", function(event) {
+//     event.preventDefault();
+//     $("#searched").empty();
+//     $("#user-heading").empty();
+//     var User = $("#search-user").val().trim();
+
+//     $.get("/api/user/:id" + User, function (data) {
+//        console.log("Looking it up.")
+//        console.log(data);
+//        if (User === username) {
+//            $("#user-heading").html("<h3>" + User + "</h3>");
+
+//            for(var i = 0; i < data.length; i++) {
+//                var row = $("<div>");
+//                row.addClass("user");
+//                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
+//                "<h3 class='panel-title'>" + data[i].User + " - " + data[i].category + "</h3>" +
+//                "<div class='rating'></div></div>" +
+//                "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
+//                $("#searched").prepend(row);
+//                $(".rating").rateYo({
+//                    rating: data[i].rating,
+//                    readOnly: true,
+//                    starWidth: "16px"
+//                });
+//            };
+//        } else {
+//            var none = $("<div>");
+//            none.addClass("none");
+//            none.html("<h3>Currently no ratings for " + User + ".  Click <a href='/add'>here</a> to add one!");
+//            $("#user-heading").append(none);
+//        }
+//    });
+//    $("#search-user").val("");
+// })
+//
+//
+//
+//
+//
+$("#user-btn").on("click", function(event) {
     event.preventDefault();
     $("#searched").empty();
     $("#user-heading").empty();
-    var item = $("#search-user").val().trim();
+    var user = $("#search-user").val().trim();
 
-    $.get("user" + User, function (data) {
+    $.get("/api/user/" + user, function (data) {
        console.log("Looking it up.")
        console.log(data);
-       if (data.length !== 0) {
-           $("#user-heading").html("<h3>" + User + "</h3>");
-
-           for(var i = 0; i < data.length; i++) {
+       if (data) {
+           console.log("user");
+           $("#user-heading").html("<h3>" + "Showing Results for: "+ user + "</h3>");
+         //
+           for(var i = 0; i < data.Ratings.length; i++) {
                var row = $("<div>");
-               row.addClass("user");
+               row.addClass("item");
                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
-               "<h3 class='panel-title'>" + data[i].User + " - " + data[i].category + "</h3>" +
+               "<h3 class='panel-title'>" + data.Ratings[i].item + "</h3>" +
                "<div class='rating'></div></div>" +
-               "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
-               $("#searched").prepend(row);
+               "<div class='panel-body'><p>" + data.Ratings[i].comment + "</p></div></div>");            
+               $("#searched").prepend(row); 
                $(".rating").rateYo({
-                   rating: data[i].rating,
+                   rating: data.Ratings[i].rating,
                    readOnly: true,
                    starWidth: "16px"
                });
@@ -239,7 +280,7 @@ $(document).ready(function () {
        } else {
            var none = $("<div>");
            none.addClass("none");
-           none.html("<h3>Currently no ratings for " + User + ".  Click <a href='/add'>here</a> to add one!");
+           none.html("<h3>Currently no ratings for " + user + ".  Click <a href='/add'>here</a> to add one!");
            $("#user-heading").append(none);
        }
    });
