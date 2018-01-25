@@ -3,6 +3,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var db = require("./models");
 var exphbs = require("express-handlebars");
+var expressJWT = require("express-jwt");
+var jwt = require("jsonwebtoken");
+var config = require("./config.js");
 
 var PORT = process.env.PORT || 8080;
 
@@ -13,6 +16,12 @@ app.use(express.static(process.cwd() + '/public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Setting up our middleware to have protected API routes
+app.use(expressJWT({ secret: config.tokenSecret }).unless({ 
+    // select paths to not be authorized
+    path: ["/", "/api/home", "/add", "/api/rating/create", "/item", /^\/item\/.*/, "/user", "/api/users/all", "/api/users/create", "/category", /^\/category\/.*/, "/login", "/user/login"] 
+}));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
