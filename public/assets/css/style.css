@@ -1,3 +1,10 @@
+body {
+    background-image: url("/images/doodles.png");
+}
+
+.nav {
+    background-color: rgb(155, 149, 149);
+}
 .panel-heading {
     position: relative;
 }
