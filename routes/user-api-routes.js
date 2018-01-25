@@ -18,10 +18,11 @@ module.exports = function (app) {
         });
     });
     // GET method for finding a specific author
-    app.get("/api/user/:id", function (req, res) {
+    app.get("/api/user/:username", function (req, res) {
+        console.log(req.params);
         db.User.findOne({
             where: {
-                id: req.params.id
+                username: req.params.username
             },
             include: db.Ratings
         }).then(function (ratings) {
