@@ -190,14 +190,15 @@ $("#user-btn").on("click", function(event) {
     $.get("/api/user/" + user, function (data) {
        console.log("Looking it up.")
        console.log(data);
-       if (user === User.username) {
+       if (data) {
+           console.log("user");
            $("#user-heading").html("<h3>" + user + "</h3>");
 
            for(var i = 0; i < data.length; i++) {
                var row = $("<div>");
-               row.addClass("user");
+               row.addClass("item");
                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
-               "<h3 class='panel-title'>" + data[i].user + " - " + data[i].category + "</h3>" +
+               "<h3 class='panel-title'>" + data[i].user + "</h3>" +
                "<div class='rating'></div></div>" +
                "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
                $("#searched").prepend(row);

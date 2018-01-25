@@ -22,7 +22,8 @@ module.exports = function (app) {
         console.log(req.params);
         db.User.findOne({
             where: {
-                username: req.params.username
+                username: { $like: "%" + req.params.username + "%" }
+                // $like: "%" + req.params.item + "%"
             },
             include: db.Ratings
         }).then(function (ratings) {
