@@ -261,7 +261,7 @@ $("#user-btn").on("click", function(event) {
                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
                "<h3 class='panel-title'>" + data[i].user + "</h3>" +
                "<div class='rating'></div></div>" +
-               "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
+               "<div class='panel-body'><b><p>" + data[i].rating + ":</p></b><p>" + data[i].comment + "</p></div></div>");
                $("#searched").prepend(row);
                $(".rating").rateYo({
                    rating: data[i].rating,
