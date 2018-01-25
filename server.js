@@ -7,12 +7,13 @@ var expressJWT = require("express-jwt");
 var jwt = require("jsonwebtoken");
 var config = require("./config.js");
 
+
 var PORT = process.env.PORT || 8080;
 
 var app = express();
 
 // Sets up the Express app to handle data parsing
-app.use(express.static(process.cwd() + '/public'));
+app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
