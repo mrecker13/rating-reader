@@ -29,14 +29,14 @@ Rate a sports team, rate a video game, rate a beer, rate a fictional bar. Anythi
 # Our Dependencies
 
 We have used
-    * Express
-    * Body-Parser
-    * Handlebars
-    * Sequelize
-    * Bcrypt-NodeJS
-    * JSONWebToken
-    * Rateyo
-    * Bootstrap
-    * jQuery
+* Express
+* Body-Parser
+* Handlebars
+* Sequelize
+* Bcrypt-NodeJS
+* JSONWebToken
+* Rateyo
+* Bootstrap
+* jQuery
 Within this app.
 
