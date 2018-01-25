@@ -252,19 +252,19 @@ $("#user-btn").on("click", function(event) {
        console.log("Looking it up.")
        console.log(data);
        if (data) {
-           console.log("user");
+           
            $("#user-heading").html("<h3>" + user + "</h3>");
 
-           for(var i = 0; i < data.length; i++) {
+           for(var i = 0; i < data.Ratings.length; i++) {
                var row = $("<div>");
                row.addClass("item");
                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
-               "<h3 class='panel-title'>" + data[i].user + "</h3>" +
+               "<h3 class='panel-title'>" + data.Ratings[i].item + "</h3>" +
                "<div class='rating'></div></div>" +
-               "<div class='panel-body'><b><p>" + data[i].rating + ":</p></b><p>" + data[i].comment + "</p></div></div>");
-               $("#searched").prepend(row);
+               "<div class='panel-body'><p>" + data.Ratings[i].comment + "</p></div></div>");            
+               $("#searched").prepend(row); 
                $(".rating").rateYo({
-                   rating: data[i].rating,
+                   rating: data.Ratings[i].rating,
                    readOnly: true,
                    starWidth: "16px"
                });
