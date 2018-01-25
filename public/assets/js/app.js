@@ -70,7 +70,7 @@ $(document).ready(function () {
             console.log("Looking it up.")
             console.log(data);
             if (data.length !== 0) {
-                $("#item-heading").html("<h3>" + item + "</h3>");
+                $("#item-heading").html("<h3>" + "Showing Results for: "+ item + "</h3>");
 
                 for(var i = 0; i < data.length; i++) {
                     var row = $("<div>");
@@ -106,7 +106,7 @@ $(document).ready(function () {
            console.log("Looking it up.")
            console.log(data);
            if (data.length !== 0) {
-               $("#cat-heading").html("<h3>" + catSearch + "</h3>")
+               $("#cat-heading").html("<h3>" + "Showing Results for: " + catSearch + "</h3>")
            
                 for(var i = 0; i < data.length; i++) {
                     var row = $("<div>");
@@ -252,9 +252,9 @@ $("#user-btn").on("click", function(event) {
        console.log("Looking it up.")
        console.log(data);
        if (data) {
-           
-           $("#user-heading").html("<h3>" + user + "</h3>");
-
+           console.log("user");
+           $("#user-heading").html("<h3>" + "Showing Results for: "+ user + "</h3>");
+         //
            for(var i = 0; i < data.Ratings.length; i++) {
                var row = $("<div>");
                row.addClass("item");
