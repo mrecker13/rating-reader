@@ -1,3 +1,10 @@
+body {
+    background-image: url("/images/doodles.png");
+}
+
+.nav {
+    background-color: rgb(155, 149, 149);
+}
 .panel-heading {
     position: relative;
 }
@@ -27,4 +34,9 @@ h1 {
 
 #item-btn, #category-btn {
     margin-top: 10px;
+}
+
+.footer {
+    float: right;
+    color: gray;
 }
