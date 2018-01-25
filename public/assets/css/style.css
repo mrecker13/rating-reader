@@ -3,10 +3,39 @@ body {
 }
 
 .nav {
-    background-color: rgb(155, 149, 149);
+    background-color: rgb(56, 52, 52);
 }
+
+.heading {
+    color: white;
+}
+
+.top-page {
+    /* background-color: rgb(117, 117, 117); */
+    background-color: rgb(56, 52, 52);
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+#user-greeting {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+
 .panel-heading {
     position: relative;
+}
+
+.panel-default>.panel-heading {
+    background-color: rgb(190, 190, 190);
+    color: rgb(0, 0, 0);
+}
+
+.panel-default {
+    border-color: rgb(56, 52, 52);
 }
 
 .rating {
@@ -19,20 +48,26 @@ body {
     float: right;
 }
 
-#new-rating {
-    margin-top: 10px;
+#new-rating, #logOut-btn {
     margin-bottom: 10px;
 }
 
 h1 {
     text-align: center;
+    padding: 30px;
+}
+
+#itemSearchDiv, #addDiv, #userSearchDiv, #catSearchDiv, #loginDiv {
+    width: 95%;
+    margin: auto;
+    padding: 10px;
 }
 
 #itemSearchDiv, #catSearchDiv {
     margin-top: 10px;
 }
 
-#item-btn, #category-btn {
+#item-btn, #category-btn, #user-btn {
     margin-top: 10px;
 }
 

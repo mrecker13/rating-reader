@@ -4,7 +4,8 @@ $(document).ready(function () {
     var localUser = localStorage.getItem("username");
 
     if(token) {
-        $("#user-greeting").append("<h2>Hello, " + localUser + "!");
+        $("#user-greeting").append("<h3>Hello, " + localUser + "!</h3>");
+        $("#button-field").append("<button type='submit' class='btn btn-danger btn-lg active' id='logOut-btn'>Logout</button>");
     }
 
     $.get("/api/home", function(data) {
@@ -19,14 +20,17 @@ $(document).ready(function () {
             $(".rating").rateYo({
                 rating: data[i].rating,
                 readOnly: true,
-                starWidth: "16px"
+                starWidth: "18px",
+                normalFill: "rgb(56, 52, 52)",
+                ratedFill: "rgb(255, 234, 45)"
             });
         }
     })
 
      $("#rateYo").rateYo({
        rating: 2.5,
-       halfStar: true
+       halfStar: true,
+       ratedFill: "rgb(255, 234, 45)"
      });
     
      $("#add-btn").on("click", function (event) {
@@ -83,7 +87,9 @@ $(document).ready(function () {
                     $(".rating").rateYo({
                         rating: data[i].rating,
                         readOnly: true,
-                        starWidth: "16px"
+                        starWidth: "18px",
+                        normalFill: "rgb(56, 52, 52)",
+                        ratedFill: "rgb(255, 234, 45)"
                     });
                 };
             } else {
@@ -119,7 +125,9 @@ $(document).ready(function () {
                     $(".rating").rateYo({
                         rating: data[i].rating,
                         readOnly: true,
-                        starWidth: "16px"
+                        starWidth: "18px",
+                        normalFill: "rgb(56, 52, 52)",
+                        ratedFill: "rgb(255, 234, 45)"
                     });
                 };
            }else {
@@ -134,17 +142,18 @@ $(document).ready(function () {
 
     $("#register-btn").on("click", function(event) {
         event.preventDefault();
+        $("#empty").empty();
 
         var newUser = {
             username: $("#user-login").val().trim(),
             password: $("#pw-login").val().trim()
         };
 
-        $.get("/user", function(data) {
+        $.get("/api/users/all", function(data) {
             for(var i = 0; i < data.length; i++) {
                 if (newUser.username === data[i].username) {
                     $("#unDiv").addClass("has-error");
-                    $("#labelError").append("<span class='label label-danger'> Username already in use</span>");
+                    $("#labelError").append("<span class='label label-danger' id='empty'> Username already in use</span>");
                     $("#labelError").attr("style", "color:rgb(156, 59, 59)");
                     return false;
                 }
@@ -163,6 +172,7 @@ $(document).ready(function () {
 
     $("#loginForm").submit(function(e){
         e.preventDefault();
+        $("#empty").empty();
         // serialize all of our form fields
         var user = $("#user-login").val().trim();
         var formDataSerialized = $(this).serialize();
@@ -173,7 +183,7 @@ $(document).ready(function () {
             var pos = data.map(function(e) { return e.username; }).indexOf(user);
             if (pos === -1) {
                 $("#unDiv").addClass("has-error");
-                $("#labelError").append("<span class='label label-danger'> Username does not exist. Please register</span>");
+                $("#labelError").append("<span class='label label-danger' id='empty'> Username does not exist. Please register</span>");
                 $("#labelError").attr("style", "color:rgb(156, 59, 59)");
                 return false;
             }
@@ -202,46 +212,6 @@ $(document).ready(function () {
 
    });
 
-//    $("#user-btn").on("click", function(event) {
-//     event.preventDefault();
-//     $("#searched").empty();
-//     $("#user-heading").empty();
-//     var User = $("#search-user").val().trim();
-
-//     $.get("/api/user/:id" + User, function (data) {
-//        console.log("Looking it up.")
-//        console.log(data);
-//        if (User === username) {
-//            $("#user-heading").html("<h3>" + User + "</h3>");
-
-//            for(var i = 0; i < data.length; i++) {
-//                var row = $("<div>");
-//                row.addClass("user");
-//                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
-//                "<h3 class='panel-title'>" + data[i].User + " - " + data[i].category + "</h3>" +
-//                "<div class='rating'></div></div>" +
-//                "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
-//                $("#searched").prepend(row);
-//                $(".rating").rateYo({
-//                    rating: data[i].rating,
-//                    readOnly: true,
-//                    starWidth: "16px"
-//                });
-//            };
-//        } else {
-//            var none = $("<div>");
-//            none.addClass("none");
-//            none.html("<h3>Currently no ratings for " + User + ".  Click <a href='/add'>here</a> to add one!");
-//            $("#user-heading").append(none);
-//        }
-//    });
-//    $("#search-user").val("");
-// })
-//
-//
-//
-//
-//
 $("#user-btn").on("click", function(event) {
     event.preventDefault();
     $("#searched").empty();
@@ -254,7 +224,7 @@ $("#user-btn").on("click", function(event) {
        if (data) {
            console.log("user");
            $("#user-heading").html("<h3>" + "Showing Results for: "+ user + "</h3>");
-         //
+         
            for(var i = 0; i < data.Ratings.length; i++) {
                var row = $("<div>");
                row.addClass("item");
@@ -266,7 +236,9 @@ $("#user-btn").on("click", function(event) {
                $(".rating").rateYo({
                    rating: data.Ratings[i].rating,
                    readOnly: true,
-                   starWidth: "16px"
+                   starWidth: "18px",
+                   normalFill: "rgb(56, 52, 52)",
+                   ratedFill: "rgb(255, 234, 45)"
                });
            };
        } else {
