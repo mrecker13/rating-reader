@@ -1,13 +1,14 @@
 <div class="container">
+    <h1>Login/Register</h1>
     <div id="loginDiv">
-        <form>
+        <form id="loginForm">
             <div class="form-group" id="unDiv">
                 <label id="labelError" for="user-login">Username:</label>
-                <input type="user" class="form-control" id="user-login">
+                <input type="user" class="form-control" id="user-login" name="username">
             </div>
             <div class="form-group">
                 <label for="pw-login">Password:</label>
-                <input type="password" class="form-control" id="pw-login">
+                <input type="password" class="form-control" id="pw-login" name="password">
                 <br>
                 <button type="submit" class="btn btn-primary" id="login-btn">Log In</button>
                 <button type="submit" class="btn btn-success" id="register-btn">Register</button>

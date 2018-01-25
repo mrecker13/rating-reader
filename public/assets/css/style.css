@@ -8,6 +8,10 @@
     top: 10px;
 }
 
+#logOut-btn {
+    float: right;
+}
+
 #new-rating {
     margin-top: 10px;
     margin-bottom: 10px;
