@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Setting up our middleware to have protected API routes
 app.use(expressJWT({ secret: config.tokenSecret }).unless({ 
     // select paths to not be authorized
-    path: ["/", "/api/home", "/add", "/api/rating/create", "/item", /^\/item\/.*/, "/user", "/api/users/all", "/api/users/create", "/category", /^\/category\/.*/, "/login", "/user/login"] 
+    path: ["/", "/api/home", "/add", "/api/rating/create", "/item", /^\/item\/.*/, "/user", /^\/api\/user\/.*/, "/api/users/all", "/api/users/create", "/category", /^\/category\/.*/, "/login", "/user/login"] 
 }));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
