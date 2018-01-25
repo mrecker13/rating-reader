@@ -140,7 +140,7 @@ $(document).ready(function () {
             password: $("#pw-login").val().trim()
         };
 
-        $.get("api/users/all", function(data) {
+        $.get("/user", function(data) {
             for(var i = 0; i < data.length; i++) {
                 if (newUser.username === data[i].username) {
                     $("#unDiv").addClass("has-error");
@@ -201,3 +201,39 @@ $(document).ready(function () {
     })
 
    });
+
+   $("#user-btn").on("click", function(event) {
+    event.preventDefault();
+    $("#searched").empty();
+    $("#user-heading").empty();
+    var item = $("#search-user").val().trim();
+
+    $.get("user" + User, function (data) {
+       console.log("Looking it up.")
+       console.log(data);
+       if (data.length !== 0) {
+           $("#user-heading").html("<h3>" + User + "</h3>");
+
+           for(var i = 0; i < data.length; i++) {
+               var row = $("<div>");
+               row.addClass("user");
+               row.append("<div class='panel panel-default'><div class='panel-heading'>" +
+               "<h3 class='panel-title'>" + data[i].User + " - " + data[i].category + "</h3>" +
+               "<div class='rating'></div></div>" +
+               "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
+               $("#searched").prepend(row);
+               $(".rating").rateYo({
+                   rating: data[i].rating,
+                   readOnly: true,
+                   starWidth: "16px"
+               });
+           };
+       } else {
+           var none = $("<div>");
+           none.addClass("none");
+           none.html("<h3>Currently no ratings for " + User + ".  Click <a href='/add'>here</a> to add one!");
+           $("#user-heading").append(none);
+       }
+   });
+   $("#search-user").val("");
+})
