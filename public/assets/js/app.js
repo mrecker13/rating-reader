@@ -4,7 +4,8 @@ $(document).ready(function () {
     var localUser = localStorage.getItem("username");
 
     if(token) {
-        $("#user-greeting").append("<h2>Hello, " + localUser + "!");
+        $("#user-greeting").append("<h3>Hello, " + localUser + "!</h3>");
+        $("#button-field").append("<button type='submit' class='btn btn-danger btn-lg active' id='logOut-btn'>Logout</button>");
     }
 
     $.get("/api/home", function(data) {
@@ -19,14 +20,17 @@ $(document).ready(function () {
             $(".rating").rateYo({
                 rating: data[i].rating,
                 readOnly: true,
-                starWidth: "16px"
+                starWidth: "18px",
+                normalFill: "rgb(56, 52, 52)",
+                ratedFill: "rgb(255, 234, 45)"
             });
         }
     })
 
      $("#rateYo").rateYo({
        rating: 2.5,
-       halfStar: true
+       halfStar: true,
+       ratedFill: "rgb(255, 234, 45)"
      });
     
      $("#add-btn").on("click", function (event) {
@@ -83,7 +87,9 @@ $(document).ready(function () {
                     $(".rating").rateYo({
                         rating: data[i].rating,
                         readOnly: true,
-                        starWidth: "16px"
+                        starWidth: "18px",
+                        normalFill: "rgb(56, 52, 52)",
+                        ratedFill: "rgb(255, 234, 45)"
                     });
                 };
             } else {
@@ -119,7 +125,9 @@ $(document).ready(function () {
                     $(".rating").rateYo({
                         rating: data[i].rating,
                         readOnly: true,
-                        starWidth: "16px"
+                        starWidth: "18px",
+                        normalFill: "rgb(56, 52, 52)",
+                        ratedFill: "rgb(255, 234, 45)"
                     });
                 };
            }else {
