@@ -46,11 +46,6 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/add", function(req, res){
-    db.User.findAll({attributes: { exclude: ['password'] }}).then(function(data){
-        res.json(data);
-    });
-  });
       // GET method for finding a specific author
       app.get("/api/user/:username", function (req, res) {
         db.User.findOne({

@@ -57,7 +57,7 @@ h1 {
     padding: 30px;
 }
 
-#itemSearchDiv, #addDiv {
+#itemSearchDiv, #addDiv, #userSearchDiv, #catSearchDiv, #loginDiv {
     width: 95%;
     margin: auto;
     padding: 10px;
