@@ -28,3 +28,8 @@ h1 {
 #item-btn, #category-btn {
     margin-top: 10px;
 }
+
+.footer {
+    float: right;
+    color: gray;
+}
