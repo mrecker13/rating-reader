@@ -8,6 +8,10 @@
     top: 10px;
 }
 
+#logOut-btn {
+    float: right;
+}
+
 #new-rating {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -23,4 +27,9 @@ h1 {
 
 #item-btn, #category-btn {
     margin-top: 10px;
+}
+
+.footer {
+    float: right;
+    color: gray;
 }

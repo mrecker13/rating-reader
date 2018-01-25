@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    var token = localStorage.getItem("token");
+    var localId = localStorage.getItem("id");
+    var localUser = localStorage.getItem("username");
+
+    if(token) {
+        $("#user-greeting").append("<h2>Hello, " + localUser + "!");
+    }
+
     $.get("/api/home", function(data) {
         for(var i = 0; i < data.length; i++) {
             var row = $("<div>");
@@ -31,13 +39,25 @@ $(document).ready(function () {
              category: $("#category").val().trim(),
              comment: $("#comment").val().trim(),
              rating: rating,
-             UserId: 1
+             UserId: localId
          };
 
-         $.post("api/rating/create", newRating, function() {
-             console.log("Added a rating!");
-             window.location.href="/";
-         });
+         if (!token) {
+            $("#itemDiv").addClass("has-error");
+            $("#labelError").append("<span class='label label-danger'> Please log in to add a rating</span>");
+            $("#labelError").attr("style", "color:rgb(156, 59, 59)");
+             $("#item").val("");
+             $("#category").val("");
+             $("#comment").val("");
+             return false;
+         }
+
+        $.post("api/rating/create", newRating, function() {
+            console.log("Added a rating!");
+            window.location.href="/";
+        });
+
+         
      });
 
      $("#item-btn").on("click", function(event) {
@@ -131,12 +151,53 @@ $(document).ready(function () {
             }
             $.post("api/users/create", newUser, function() {
                 console.log("Registered!");
-                location.reload();
+                $("#unDiv").addClass("has-success");
+                $("#labelError").append("<span class='label label-success'>  Successfully registered!</span>");
+                $("#labelError").attr("style", "color:rgb(115, 181, 102)");
             });
         })
 
         $("#user-login").val("");
         $("#pw-login").val("");
+    });
+
+    $("#loginForm").submit(function(e){
+        e.preventDefault();
+        // serialize all of our form fields
+        var user = $("#user-login").val().trim();
+        var formDataSerialized = $(this).serialize();
+        console.log(user);
+
+        $.get("api/users/all", function(data) {
+            console.log(data);
+            var pos = data.map(function(e) { return e.username; }).indexOf(user);
+            if (pos === -1) {
+                $("#unDiv").addClass("has-error");
+                $("#labelError").append("<span class='label label-danger'> Username does not exist. Please register</span>");
+                $("#labelError").attr("style", "color:rgb(156, 59, 59)");
+                return false;
+            }
+            // post that data to our user/new route
+            $.post("/user/login", formDataSerialized).then(function(data){
+                console.log(data);
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("id", data.id);
+                localStorage.setItem("username", data.username);
+                window.location.href = '/';
+                return;
+            }).catch(function(err){
+                console.log(err);
+            });
+        });
+
+        $("#user-login").val("");
+        $("#pw-login").val("");
+    });
+
+    $("#logOut-btn").on("click", function(event) {
+        event.preventDefault();
+        localStorage.clear();
+        window.location.href = "/login";
     })
 
    });
@@ -189,18 +250,16 @@ $("#user-btn").on("click", function(event) {
 
     $.get("/api/user/" + user, function (data) {
        console.log("Looking it up.")
-       console.log(user);
-       console.log(data.username);
-       if (user === data.username) {
-           console.log(user);
-           console.log(data.username);
+       console.log(data);
+       if (data) {
+           console.log("user");
            $("#user-heading").html("<h3>" + user + "</h3>");
 
            for(var i = 0; i < data.length; i++) {
                var row = $("<div>");
-               row.addClass("user");
+               row.addClass("item");
                row.append("<div class='panel panel-default'><div class='panel-heading'>" +
-               "<h3 class='panel-title'>" + data[i].user + " - " + data[i].category + "</h3>" +
+               "<h3 class='panel-title'>" + data[i].user + "</h3>" +
                "<div class='rating'></div></div>" +
                "<div class='panel-body'><b><p>" + data[i].User.username + ":</p></b><p>" + data[i].comment + "</p></div></div>");
                $("#searched").prepend(row);
