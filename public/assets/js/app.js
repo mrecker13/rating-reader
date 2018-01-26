@@ -71,8 +71,6 @@ $(document).ready(function () {
          var item = $("#search-item").val().trim();
 
          $.get("/item/" + item, function (data) {
-            console.log("Looking it up.")
-            console.log(data);
             if (data.length !== 0) {
                 $("#item-heading").html("<h3>" + "Showing Results for: "+ item + "</h3>");
 
@@ -109,8 +107,6 @@ $(document).ready(function () {
         var catSearch = $("#search-category").val().trim();
 
         $.get("/category/" + catSearch, function (data) {
-           console.log("Looking it up.")
-           console.log(data);
            if (data.length !== 0) {
                $("#cat-heading").html("<h3>" + "Showing Results for: " + catSearch + "</h3>")
            
@@ -142,7 +138,7 @@ $(document).ready(function () {
 
     $("#register-btn").on("click", function(event) {
         event.preventDefault();
-        $("#empty").empty();
+        $("#empty").remove();
 
         var newUser = {
             username: $("#user-login").val().trim(),
@@ -161,7 +157,7 @@ $(document).ready(function () {
             $.post("api/users/create", newUser, function() {
                 console.log("Registered!");
                 $("#unDiv").addClass("has-success");
-                $("#labelError").append("<span class='label label-success'>  Successfully registered!</span>");
+                $("#labelError").append("<span class='label label-success' id='empty'>  Successfully registered!</span>");
                 $("#labelError").attr("style", "color:rgb(115, 181, 102)");
             });
         })
@@ -172,7 +168,7 @@ $(document).ready(function () {
 
     $("#loginForm").submit(function(e){
         e.preventDefault();
-        $("#empty").empty();
+        $("#empty").remove();
         // serialize all of our form fields
         var user = $("#user-login").val().trim();
         var formDataSerialized = $(this).serialize();
@@ -189,7 +185,6 @@ $(document).ready(function () {
             }
             // post that data to our user/new route
             $.post("/user/login", formDataSerialized).then(function(data){
-                console.log(data);
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("id", data.id);
                 localStorage.setItem("username", data.username);
@@ -197,6 +192,10 @@ $(document).ready(function () {
                 return;
             }).catch(function(err){
                 console.log(err);
+                $("#pwDiv").addClass("has-error");
+                $("#pwError").append("<span class='label label-danger' id='empty'> Incorrect password</span>");
+                $("#pwError").attr("style", "color:rgb(156, 59, 59)");
+                return false;
             });
         });
 
@@ -219,8 +218,6 @@ $("#user-btn").on("click", function(event) {
     var user = $("#search-user").val().trim();
 
     $.get("/api/user/" + user, function (data) {
-       console.log("Looking it up.")
-       console.log(data);
        if (data) {
            console.log("user");
            $("#user-heading").html("<h3>" + "Showing Results for: "+ user + "</h3>");
