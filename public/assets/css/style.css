@@ -75,3 +75,27 @@ h1 {
     float: right;
     color: gray;
 }
+
+@media screen and (max-width: 750px) {
+    #user-greeting {
+        position: static;
+        text-align: center;
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    h1 {
+        padding: 5px;
+    }
+
+    .panel-heading {
+        height: 55px;
+    }
+
+    .rating {
+        left: 10px;
+        top: 32px;
+    }
+}
