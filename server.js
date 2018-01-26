@@ -27,7 +27,7 @@ app.use(expressJWT({ secret: config.tokenSecret }).unless({
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-require("./routes/html-routes.js")(app);
+require("./routes/HTML-routes.js")(app);
 require("./routes/user-api-routes.js")(app);
 require("./routes/rating-api-routes.js")(app);
 
